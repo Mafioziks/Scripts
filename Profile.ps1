@@ -1,3 +1,5 @@
+# Location to place in: ~\Documents\PowerShell
+
 $ESC = [char]27
 
 function Prompt
