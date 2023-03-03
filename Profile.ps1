@@ -2,20 +2,17 @@
 
 $ESC = [char]27
 
-function Prompt
-{
+function Prompt {
     $LocationName = (Get-Item .).Name
 
-    if ((Get-Location).Path -eq "/home/$($env:UserName)")
-    {
+    if ((Get-Location).Path -in "/home/$($env:UserName)", "C:\Users\$($env:UserName)") {
         $LocationName = "~"
     }
 
     $UserAtDomain = ""
-    if ($env:COMPUTERNAME -ne $env:USERDOMAIN)
-    {
+    if ($env:COMPUTERNAME -ne $env:USERDOMAIN) {
         $UserAtDomain = $env:USERDOMAIN + "\"
     }
 
-    "$ESC[38;2;255;0;200m[" + $env:COMPUTERNAME + "]38;2;255;200;0m[" + $UserAtDomain + $env:UserName + "]$ESC[0m " + $LocationName + " > "
+    "$ESC[38;2;255;0;200m[" + $env:COMPUTERNAME + "]$ESC[38;2;255;200;0m[" + $UserAtDomain + $env:UserName + "]$ESC[0m " + $LocationName + " > "
 }
